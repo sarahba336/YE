@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindframe - Psychological Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0a0a12;
+            --bg-card: rgba(20, 18, 35, 0.8);
+            --purple-primary: #8b5cf6;
+            --purple-light: #a78bfa;
+            --blue-primary: #3b82f6;
+            --blue-light: #60a5fa;
+            --text-white: #f8fafc;
+            --text-gray: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a1033 0%, #0f172a 50%, #1a0f2e 100%);
+            min-height: 100vh;
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Background orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            pointer-events: none;
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(139, 92, 246, 0.3);
+            top: 5%;
+            left: 5%;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: rgba(59, 130, 246, 0.25);
+            bottom: 5%;
+            right: 5%;
+            animation-delay: 2s;
+        }
+
+        .orb-3 {
+            width: 600px;
+            height: 600px;
+            background: rgba(124, 58, 237, 0.15);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 1s;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        /* Intro Page */
+        .intro-page {
+            text-align: center;
+            max-width: 700px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .brain-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .brain-icon::before {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background: rgba(139, 92, 246, 0.3);
+            border-radius: 50%;
+            filter: blur(20px);
+        }
+
+        .brain-icon svg {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            z-index: 1;
+            stroke: var(--purple-light);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 50%, #60a5fa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: rgba(196, 181, 253, 0.8);
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+
+        .tagline {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: rgba(96, 165, 250, 0.6);
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .glass-card {
+            background: rgba(30, 25, 50, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .glass-card p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .glass-card p span {
+            color: var(--purple-light);
+            font-weight: 500;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: white;
+            background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+            border: none;
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 15px 50px rgba(124, 58, 237, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--purple-light);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        /* Quiz Page */
+        .quiz-page {
+            width: 100%;
+            max-width: 700px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .progress-bar {
+            margin-bottom: 2rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-track {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        .question-card {
+            background: rgba(30, 25, 50, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.3), rgba(37, 99, 235, 0.3));
+            border-radius: 0.75rem;
+        }
+
+        .question-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--purple-light);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .question-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .question-hint {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option {
+            background: rgba(30, 25, 50, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .option:hover {
+            border-color: rgba(139, 92, 246, 0.5);
+            transform: scale(1.01);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.15);
+        }
+
+        .option.selected {
+            border-color: var(--purple-primary);
+            background: rgba(139, 92, 246, 0.15);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.25);
+        }
+
+        .radio {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--text-muted);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .option.selected .radio {
+            border-color: var(--purple-light);
+            background: rgba(139, 92, 246, 0.2);
+        }
+
+        .radio-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--purple-light);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .option.selected .radio-dot {
+            opacity: 1;
+        }
+
+        .option-content h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .option-content p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* Results Page */
+        .results-page {
+            width: 100%;
+            max-width: 800px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .fingerprint-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 2rem;
+            color: var(--purple-light);
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .fingerprint-badge svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .profile-title {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 50%, #60a5fa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+        }
+
+        .profile-subtitle {
+            font-size: 1.25rem;
+            color: rgba(96, 165, 250, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .result-card {
+            background: linear-gradient(145deg, rgba(40, 30, 70, 0.9), rgba(25, 30, 55, 0.9));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 60px rgba(139, 92, 246, 0.2);
+        }
+
+        .result-section {
+            margin-bottom: 2rem;
+        }
+
+        .result-section:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .result-section h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .result-section h2 svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--purple-light);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .result-section > p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .traits-list {
+            list-style: none;
+        }
+
+        .traits-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        .traits-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            border-radius: 50%;
+        }
+
+        .mind-mo {
+            background: linear-gradient(90deg, rgba(76, 29, 149, 0.4), rgba(30, 58, 138, 0.4));
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .mind-mo h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--blue-light);
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .mind-mo h3 svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .mind-mo p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .results-actions {
+            text-align: center;
+        }
+
+        /* Hidden */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .glass-card, .question-card, .result-card {
+                padding: 1.5rem;
+            }
+            
+            .option {
+                padding: 1rem;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Background Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="container">
+        <!-- Intro Page -->
+        <div id="intro-page" class="intro-page">
+            <div class="brain-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/>
+                    <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/>
+                </svg>
+            </div>
+            
+            <h1 class="font-display">Mindframe</h1>
+            <p class="subtitle">The Murder Mystery Psychological Profile</p>
+            
+            <div class="tagline">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                </svg>
+                <span>Discover Your Cognitive Fingerprint</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                </svg>
+            </div>
+            
+            <div class="glass-card">
+                <p>
+                    Welcome, detective. Before we reveal the truth behind the murder, 
+                    we invite you to discover something even more intriguing — 
+                    <span>the way your mind works</span>.
+                </p>
+                <br>
+                <p>
+                    Based on your guesses throughout the game, we'll generate a unique 
+                    psychological profile that reveals your decision-making patterns, 
+                    cognitive biases, and investigative style.
+                </p>
+            </div>
+            
+            <button class="btn" onclick="startQuiz()">
+                Begin Analysis
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m9 18 6-6-6-6"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Quiz Page -->
+        <div id="quiz-page" class="quiz-page hidden">
+            <div class="progress-bar">
+                <div class="progress-header">
+                    <span id="progress-text">Question 1 of 4</span>
+                    <span id="progress-percent">25%</span>
+                </div>
+                <div class="progress-track">
+                    <div id="progress-fill" class="progress-fill" style="width: 25%"></div>
+                </div>
+            </div>
+            
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-icon" id="question-icon">
+                        <svg viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <h2 class="question-title" id="question-text">Who was your guess for the victim?</h2>
+                </div>
+                
+                <p class="question-hint">
+                    For the following answers, please enter your guesses, not the ones revealed at the end of the rounds.
+                </p>
+                
+                <div class="options" id="options-container">
+                    <!-- Options will be inserted here -->
+                </div>
+            </div>
+            
+            <div class="quiz-nav">
+                <button class="btn" id="next-btn" onclick="nextQuestion()" disabled>
+                    Next Question
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m9 18 6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div id="results-page" class="results-page hidden">
+            <div class="results-header">
+                <div class="fingerprint-badge">
+                    <svg viewBox="0 0 24 24"><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"/><path d="M2 12a10 10 0 0 1 18-6"/><path d="M2 16h.01"/><path d="M21.8 16c.2-2 .131-5.354 0-6"/><path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/><path d="M8.65 22c.21-.66.45-1.32.57-2"/><path d="M9 6.8a6 6 0 0 1 9 5.2v2"/></svg>
+                    <span>Your Cognitive Fingerprint</span>
+                </div>
+                
+                <h1 class="profile-title font-display" id="result-title">The Storyweaver</h1>
+                <p class="profile-subtitle" id="result-subtitle">Spins a gripping theory from the first spark...</p>
+            </div>
+            
+            <div class="result-card">
+                <div class="result-section">
+                    <h2>
+                        <svg viewBox="0 0 24 24"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+                        Your Psychological Profile
+                    </h2>
+                    <p id="result-description">Your profile description will appear here.</p>
+                </div>
+                
+                <div class="result-section">
+                    <h2>Your Key Traits</h2>
+                    <ul class="traits-list" id="traits-list">
+                        <!-- Traits will be inserted here -->
+                    </ul>
+                </div>
+                
+                <div class="mind-mo">
+                    <h3>
+                        <svg viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                        Your Mind's MO
+                    </h3>
+                    <p id="mind-mo">The Storyweaver</p>
+                </div>
+            </div>
+            
+            <div class="results-actions">
+                <button class="btn btn-outline" onclick="restartQuiz()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/>
+                    </svg>
+                    Start New Analysis
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz Data
+        const questions = [
+            {
+                id: 'victim',
+                question: 'Who was your guess for the victim?',
+                icon: '<svg viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+                options: [
+                    { value: 'A', label: 'Victim A', description: 'The charismatic leader who seemed untouchable' },
+                    { value: 'B', label: 'Victim B', description: 'The quiet observer who knew too much' },
+                ],
+            },
+            {
+                id: 'location',
+                question: 'Where did you think the murder took place?',
+                icon: '<svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+                options: [
+                    { value: 'C', label: 'Location C', description: 'The isolated study - unconventional and hidden' },
+                    { value: 'D', label: 'Location D', description: 'The grand ballroom - familiar and dramatic' },
+                ],
+            },
+            {
+                id: 'causeOfDeath',
+                question: 'What was your guess for the cause of death?',
+                icon: '<svg viewBox="0 0 24 24"><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M8 20a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4Z"/><path d="M12 16v-2"/><path d="M10 16h4"/></svg>',
+                options: [
+                    { value: 'E', label: 'Cause E', description: 'A dramatic, theatrical method revealed late' },
+                    { value: 'F', label: 'Cause F', description: 'A subtle, methodical approach from early clues' },
+                ],
+            },
+            {
+                id: 'motive',
+                question: 'What motive did you identify?',
+                icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+                options: [
+                    { value: 'G', label: 'Motive G', description: 'Personal betrayal - driven by character and relationships' },
+                    { value: 'H', label: 'Motive H', description: 'Contextual evidence - facts over personalities' },
+                ],
+            },
+        ];
+
+        // State
+        let currentQuestion = 0;
+        let answers = {
+            victim: '',
+            location: '',
+            causeOfDeath: '',
+            motive: '',
+        };
+
+        // Start Quiz
+        function startQuiz() {
+            document.getElementById('intro-page').classList.add('hidden');
+            document.getElementById('quiz-page').classList.remove('hidden');
+            renderQuestion();
+        }
+
+        // Render Question
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question-text').textContent = q.question;
+            document.getElementById('question-icon').innerHTML = q.icon;
+            
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress-text').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('progress-percent').textContent = `${Math.round(progress)}%`;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            q.options.forEach(opt => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = `option ${answers[q.id] === opt.value ? 'selected' : ''}`;
+                optionDiv.onclick = () => selectOption(q.id, opt.value);
+                optionDiv.innerHTML = `
+                    <div class="radio">
+                        <div class="radio-dot"></div>
+                    </div>
+                    <div class="option-content">
+                        <h3>${opt.label}</h3>
+                        <p>${opt.description}</p>
+                    </div>
+                `;
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            const nextBtn = document.getElementById('next-btn');
+            nextBtn.disabled = !answers[q.id];
+            nextBtn.innerHTML = currentQuestion === questions.length - 1 
+                ? 'Reveal Profile <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>'
+                : 'Next Question <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>';
+        }
+
+        // Select Option
+        function selectOption(questionId, value) {
+            answers[questionId] = value;
+            renderQuestion();
+        }
+
+        // Next Question
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        // Get Profile
+        function getProfile() {
+            const { victim, location, causeOfDeath, motive } = answers;
+            const A = victim === 'A';
+            const B = victim === 'B';
+            const C = location === 'C';
+            const D = location === 'D';
+            const E = causeOfDeath === 'E';
+            const F = causeOfDeath === 'F';
+            const G = motive === 'G';
+            const H = motive === 'H';
+
+            const traits = [];
+            
+            if (A) {
+                traits.push('You adapt easily as new information appears and you naturally update your views.');
+            } else if (B) {
+                traits.push('You form strong early impressions and stick to them, which helps you make quick decisions and commit confidently.');
+            }
+
+            if (C) {
+                traits.push("You're comfortable considering less obvious possibilities and slower, more analytical pathways.");
+            } else if (D) {
+                traits.push("You're drawn to explanations that feel familiar or intuitive, especially in fast-moving situations.");
+            }
+
+            if (E) {
+                traits.push("You're strongly influenced by dramatic or authoritative new details, even if they appear late, and you may reshape earlier interpretations around them.");
+            } else if (F) {
+                traits.push("You resist being swayed by later or more vivid information and stick closely to the earliest, most stable evidence.");
+            }
+
+            if (G) {
+                traits.push("You place weight on people's overall impression - warmth, competence, trustworthiness - when making decisions.");
+            } else if (H) {
+                traits.push("You separate a person's likeability from the facts, focusing more on contextual evidence.");
+            }
+
+            let profile = { title: '', subtitle: '', description: '', mindMO: '' };
+
+            if (B && D && E && G) {
+                profile = {
+                    title: 'The Storyweaver',
+                    subtitle: 'Spins a gripping theory from the first spark, letting dramatic clues and charismatic figures guide the plot.',
+                    description: 'Your team follows the strongest, most vivid leads with confidence, letting striking late details and character impressions shape the story. You build bold, cohesive narratives quickly and commit to them, even when contradictions arise - valuing intuition, emotional cues, and dramatic developments.',
+                    mindMO: 'The Storyweaver',
+                };
+            } else if (B && D && E && H) {
+                profile = {
+                    title: 'The Hard-Nosed Narrativist',
+                    subtitle: "Builds fast, vivid theories but refuses to be charmed or misled by anyone's reputation.",
+                    description: "You lock onto early interpretations yet stay sceptical of charming or authoritative characters. While vivid or dramatic late clues can sway your direction, people themselves never distract you - your theories rely on striking evidence, not personalities.",
+                    mindMO: 'The Hard-Nosed Narrativist',
+                };
+            } else if (B && D && F && G) {
+                profile = {
+                    title: 'The Character-Bound Sleuth',
+                    subtitle: 'Forms an early story shaped by setting and personalities - and holds it steady.',
+                    description: 'Your approach blends quick commitment with loyalty to familiar storylines and strong impressions of people. You resist late misinformation, but early clues, vivid scenes, and character warmth strongly frame your final judgement.',
+                    mindMO: 'The Character-Bound Sleuth',
+                };
+            } else if (B && D && F && H) {
+                profile = {
+                    title: 'The Grounded Traditionalist',
+                    subtitle: 'Leans on classic mystery logic and early leads while staying immune to theatrics and charisma.',
+                    description: 'You gravitate to familiar explanations and strong early patterns, but you separate evidence from personality and avoid being pushed off course by late misleading details. Your judgments stem from narrative familiarity, not human charm.',
+                    mindMO: 'The Grounded Traditionalist',
+                };
+            } else if (B && C && E && G) {
+                profile = {
+                    title: 'The Impression-Driven Reconstructor',
+                    subtitle: "Defies clichés, trusts strong personalities, and lets dramatic evidence rewrite the story.",
+                    description: 'You commit early, resist familiar clichés, and allow powerful late clues and character impressions to reshape your theory. You think dynamically through the lens of both authority and personality, even while ignoring the "obvious" options.',
+                    mindMO: 'The Impression-Driven Reconstructor',
+                };
+            } else if (B && C && E && H) {
+                profile = {
+                    title: 'The Analytical Reactivist',
+                    subtitle: 'Avoids the obvious and ignores personalities but can be swayed by powerful new clues.',
+                    description: "You choose early narratives over familiar tropes and update your views mainly when vivid late details demand it. Personal charm doesn't move you; persuasive evidence does. You're unconventional and reactive in equal measure.",
+                    mindMO: 'The Analytical Reactivist',
+                };
+            } else if (B && C && F && G) {
+                profile = {
+                    title: 'The Instinctive Judge',
+                    subtitle: 'Holds firm to first theories and is guided by a sharp read on motives and character.',
+                    description: "You form early interpretations, avoid predictable solutions, and resist misleading late details - but strong impressions of characters still shape your direction. You trust your initial instincts and your read of people equally.",
+                    mindMO: 'The Instinctive Judge',
+                };
+            } else if (B && C && F && H) {
+                profile = {
+                    title: 'The Lone-Line Thinker',
+                    subtitle: "Unaffected by clichés, theatrics, or personalities — once you have a lead, you follow it.",
+                    description: 'You build an early theory and protect it from misleading late evidence, familiar tropes, or charming personalities. You\'re independent-minded, systematic, and unaffected by noise — sticking quietly to the path you chose first.',
+                    mindMO: 'The Lone-Line Thinker',
+                };
+            } else if (A && D && E && G) {
+                profile = {
+                    title: 'The Human-Story Interpreter',
+                    subtitle: 'Follows the emotional arc of the case - people, drama, and familiarity lead the way.',
+                    description: 'You stay open-minded early on, lean toward intuitive or familiar explanations, and allow dramatic late information and character impressions to reshape the case. You build human-centred, vivid narratives that evolve as the story unfolds.',
+                    mindMO: 'The Human-Story Interpreter',
+                };
+            } else if (A && D && E && H) {
+                profile = {
+                    title: 'The Scene-Reader',
+                    subtitle: 'Follows atmosphere, familiarity, and dramatic cues more than human motives.',
+                    description: "You keep your options open but gravitate toward familiar or intuitive answers. Late dramatic clues can shift your direction, but people's personalities don't sway you. You produce theories shaped by scene, mood, and tension - not by character.",
+                    mindMO: 'The Scene-Reader',
+                };
+            } else if (A && D && F && G) {
+                profile = {
+                    title: 'The Social Intuitionist',
+                    subtitle: 'Reads relationships and personalities to anchor the case, avoiding late misinformation.',
+                    description: 'You hold multiple possibilities early on, favour familiar explanations, resist false late information, and rely heavily on your impression of people. You interpret events through social intuition rather than technical detail.',
+                    mindMO: 'The Social Intuitionist',
+                };
+            } else if (A && D && F && H) {
+                profile = {
+                    title: 'The Classic-Case Analyst',
+                    subtitle: 'Approaches mysteries through traditional patterns, cautious reasoning, and stable early evidence.',
+                    description: 'You stay open at the start and lean toward explanations that feel familiar, yet you avoid being misled by late vivid details or by personalities. You trust classic logic and atmosphere over drama or character.',
+                    mindMO: 'The Classic-Case Analyst',
+                };
+            } else if (A && C && E && G) {
+                profile = {
+                    title: 'The Motive-Bender',
+                    subtitle: 'Adapts theories in response to personalities and dramatic revelations.',
+                    description: "You explore multiple possibilities without relying on familiar patterns, but strong late details and character impressions can reshape your understanding. You're creative, flexible, and story-driven, especially when human motives come into play.",
+                    mindMO: 'The Motive-Bender',
+                };
+            } else if (A && C && E && H) {
+                profile = {
+                    title: 'The Evidence Drifter',
+                    subtitle: 'Floats between possibilities, steered mainly by the intensity and timing of clues.',
+                    description: "You remain open-minded and avoid predictable solutions, and vivid late clues can still alter your direction - but character charm never blinds you. You're guided by evidence rhythm rather than humans or familiarity.",
+                    mindMO: 'The Evidence Drifter',
+                };
+            } else if (A && C && F && G) {
+                profile = {
+                    title: 'The Empathic Evaluator',
+                    subtitle: 'Balances broad reasoning with sharp emotional and interpersonal intuition.',
+                    description: "You weigh all possibilities early, avoid clichés, stick with stable evidence, yet people's character warmth or suspicion levels influence how you connect the dots. You think broadly but through a human lens.",
+                    mindMO: 'The Empathic Evaluator',
+                };
+            } else if (A && C && F && H) {
+                profile = {
+                    title: 'The Forensic Mind',
+                    subtitle: 'Cold, clear, structured - follows the evidence without being pulled by familiarity, drama, or character.',
+                    description: 'You keep all options open, reject familiar assumptions, ignore misleading late twists, and judge facts independently from personality. You approach mysteries with clean logic, stable evidence tracking, and minimal noise.',
+                    mindMO: 'The Forensic Mind',
+                };
+            }
+
+            return { traits, profile };
+        }
+
+        // Show Results
+        function showResults() {
+            const { traits, profile } = getProfile();
+            
+            document.getElementById('quiz-page').classList.add('hidden');
+            document.getElementById('results-page').classList.remove('hidden');
+            
+            document.getElementById('result-title').textContent = profile.title;
+            document.getElementById('result-subtitle').textContent = profile.subtitle;
+            document.getElementById('result-description').textContent = profile.description;
+            document.getElementById('mind-mo').textContent = profile.mindMO;
+            
+            const traitsList = document.getElementById('traits-list');
+            traitsList.innerHTML = '';
+            traits.forEach(trait => {
+                const li = document.createElement('li');
+                li.textContent = trait;
+                traitsList.appendChild(li);
+            });
+        }
+
+        // Restart Quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            answers = {
+                victim: '',
+                location: '',
+                causeOfDeath: '',
+                motive: '',
+            };
+            document.getElementById('results-page').classList.add('hidden');
+            document.getElementById('intro-page').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
