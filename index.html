@@ -560,7 +560,7 @@
             </div>
             
             <h1 class="font-display">Mindframe</h1>
-            <p class="subtitle">The Murder Mystery Psychological Profile</p>
+            <p class="subtitle">The first mystery that solves you</p>
             
             <div class="tagline">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -574,20 +574,18 @@
             
             <div class="glass-card">
                 <p>
-                    Welcome, detective. Before we reveal the truth behind the murder, 
-                    we invite you to discover something even more intriguing — 
-                    <span>the way your mind works</span>.
+                    Welcome detective. You’ve gathered the evidence and examined the clues. Now it’s time to make your first deduction: 
+                    <span>Who do you believe the victim is?</span>.
                 </p>
                 <br>
                 <p>
-                    Based on your guesses throughout the game, we'll generate a unique 
-                    psychological profile that reveals your decision-making patterns, 
-                    cognitive biases, and investigative style.
+                    Submit your guess carefully - each stage will reveal the outcome, provide more context, and guide you to the next part of the investigation.
+                    Once you submit, you’ll see the outcome of Stage 1 and the next piece of the story will unfold.
                 </p>
             </div>
             
             <button class="btn" onclick="startQuiz()">
-                Begin Analysis
+                Guess Victim
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="m9 18 6-6-6-6"/>
                 </svg>
@@ -615,7 +613,7 @@
                 </div>
                 
                 <p class="question-hint">
-                    For the following answers, please enter your guesses, not the ones revealed at the end of the rounds.
+                    Based on the evidence from Stage 1, please enter your guess.
                 </p>
                 
                 <div class="options" id="options-container">
@@ -689,8 +687,8 @@
                 question: 'Who was your guess for the victim?',
                 icon: '<svg viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
                 options: [
-                    { value: 'A', label: 'Victim A', description: 'The charismatic leader who seemed untouchable' },
-                    { value: 'B', label: 'Victim B', description: 'The quiet observer who knew too much' },
+                    { value: 'A', label: 'Jasmine Winter'},
+                    { value: 'B', label: 'Jade Winter'},
                 ],
             },
             {
